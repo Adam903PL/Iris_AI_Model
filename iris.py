@@ -6,24 +6,19 @@ from tensorflow.keras.layers import Dense, Input
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
 
-# Wczytanie i przygotowanie danych
 iris_data = load_iris()
 features = iris_data.data
 labels = iris_data.target
 
-# Skalowanie cech
 normalizer = StandardScaler()
 features_scaled = normalizer.fit_transform(features)
 
-# One-hot encoding etykiet klas
-labels_one_hot = to_categorical(labels)
+labels_one = to_categorical(labels)
 
-# Podział na zbiory treningowe i testowe
 X_train, X_test, y_train, y_test = train_test_split(
-    features_scaled, labels_one_hot, test_size=0.2, random_state=42
+    features_scaled, labels_one, test_size=0.2, random_state=42
 )
 
-# Budowa modelu sieci neuronowej
 classifier = Sequential([
     Input(shape=(4,)),
     Dense(10, activation='relu'),
